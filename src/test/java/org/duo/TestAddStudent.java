@@ -100,19 +100,19 @@ public class TestAddStudent {
     }
 
     @Test
-    public void TC5_BBT_BVA() {
+    public void TC5_BBT_EC() {
         Student student = new Student("1", "Diana", 935, "mail");
         assertEquals(service.addStudent(student), student);
     }
 
     @Test
-    public void TC6_BBT_BVA() {
+    public void TC6_BBT_EC() {
         Student student = new Student("1", "Diana", 935, "mail");
         assertEquals(service.addStudent(student), student);
     }
 
     @Test
-    public void TC7_BBT_BVA() {
+    public void TC7_BBT_EC() {
         Student student = new Student("1", "", 935, "mail");
         try {
             service.addStudent(student);
@@ -122,7 +122,7 @@ public class TestAddStudent {
     }
 
     @Test
-    public void TC8_BBT_BVA() {
+    public void TC8_BBT_EC() {
         Student student = new Student("1", null, 935, "mail");
         try {
             service.addStudent(student);
@@ -132,13 +132,13 @@ public class TestAddStudent {
     }
 
     @Test
-    public void TC9_BBT_BVA() {
+    public void TC9_BBT_EC() {
         Student student = new Student("1", "Diana", 935, "mail");
         assertEquals(service.addStudent(student), student);
     }
 
     @Test
-    public void TC10_BBT_BVA() {
+    public void TC10_BBT_EC() {
         Student student = new Student("1", "Diana", 935, "");
         try {
             service.addStudent(student);
@@ -148,7 +148,7 @@ public class TestAddStudent {
     }
 
     @Test
-    public void TC11_BBT_BVA() {
+    public void TC11_BBT_EC() {
         Student student = new Student("1", "Diana", 935, null);
         try {
             service.addStudent(student);
@@ -158,13 +158,13 @@ public class TestAddStudent {
     }
 
     @Test
-    public void TC12_BBT_BVA() {
+    public void TC12_BBT_EC() {
         Student student = new Student("1", "Diana", 935, "mail");
         assertEquals(service.addStudent(student), student);
     }
 
     @Test
-    public void TC13_BBT_BVA() {
+    public void TC13_BBT_EC() {
         Student student = new Student("1", "Diana", 935, "mail");
         assertEquals(service.addStudent(student), student);
     }
