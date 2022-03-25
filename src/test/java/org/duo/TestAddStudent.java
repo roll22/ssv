@@ -167,5 +167,6 @@ public class TestAddStudent {
     public void TC13_BBT_EC() {
         Student student = new Student("1", "Diana", 935, "mail");
         assertEquals(service.addStudent(student), student);
+        System.out.println("bongo");
     }
 }
