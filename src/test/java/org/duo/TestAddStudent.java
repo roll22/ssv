@@ -9,17 +9,14 @@ import org.duo.validation.NotaValidator;
 import org.duo.validation.StudentValidator;
 import org.duo.validation.TemaValidator;
 import org.duo.validation.ValidationException;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
-import static org.junit.Assert.assertEquals;
+import static org.duo.Util.makeTempFile;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class TestAddStudent {
     private StudentXMLRepo studentXMLRepository;
@@ -28,33 +25,16 @@ public class TestAddStudent {
 
     private Service service;
 
-    @Before
-    public void setup() {
-        StudentValidator vs = new StudentValidator();
-        TemaValidator ts = new TemaValidator();
+    @BeforeEach
+    void setUp() throws IOException {
+        StudentValidator studentValidator = new StudentValidator();
+        TemaValidator temaValidator = new TemaValidator();
+        StudentXMLRepo studentXMLRepository = new StudentXMLRepo(makeTempFile("fisiere/Studenti.xml", "xml"));
+        TemaXMLRepo temaXMLRepository = new TemaXMLRepo(makeTempFile("fisiere/Teme.xml", "xml"));
+        NotaValidator notaValidator = new NotaValidator(studentXMLRepository, temaXMLRepository);
+        NotaXMLRepo notaXMLRepository = new NotaXMLRepo(makeTempFile("fisiere/Note.xml", "xml"));
 
-        studentXMLRepository = new StudentXMLRepo("src/test/resources/studenti.xml");
-        notaXMLRepository = new NotaXMLRepo("src/test/resources/note.xml");
-        temaXMLRepository = new TemaXMLRepo("src/test/resources/teme.xml");
-        NotaValidator nv = new NotaValidator(studentXMLRepository, temaXMLRepository);
-
-        service = new Service(studentXMLRepository, vs, temaXMLRepository, ts, notaXMLRepository, nv);
-
-    }
-
-    @After
-    public void tearDown() {
-        try {
-            String defaultFileContent = new String(Files.readAllBytes(Paths.get("src/test/resources/defaultFile.xml")),
-                StandardCharsets.UTF_8);
-
-            PrintWriter printWriter = new PrintWriter("src/test/resources/studenti.xml");
-
-            printWriter.print(defaultFileContent);
-            printWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        service = new Service(studentXMLRepository, studentValidator, temaXMLRepository, temaValidator, notaXMLRepository, notaValidator);
     }
 
     @Test
@@ -144,7 +124,8 @@ public class TestAddStudent {
             service.addStudent(student);
         } catch (ValidationException e) {
             assertEquals(e.getMessage(), "Email incorect!");
-        };
+        }
+        ;
     }
 
     @Test
@@ -154,7 +135,8 @@ public class TestAddStudent {
             service.addStudent(student);
         } catch (ValidationException e) {
             assertEquals(e.getMessage(), "Email incorect!");
-        };
+        }
+        ;
     }
 
     @Test
