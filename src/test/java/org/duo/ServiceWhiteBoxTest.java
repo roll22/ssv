@@ -64,7 +64,7 @@ public class ServiceWhiteBoxTest {
     void addTema_nullDescription_ValidationException() {
         var assignment = makeValidAssignment();
         assignment.setDescriere(null);
-        Assertions.assertThrows(ValidationException.class, () -> service.addTema(assignment));
+        Assertions.assertThrows(NullPointerException.class, () -> service.addTema(assignment));
     }
 
     @Test
