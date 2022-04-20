@@ -1,11 +1,13 @@
 package org.duo;
 
+import org.duo.domain.Nota;
 import org.duo.domain.Student;
 import org.duo.domain.Tema;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 
 public class Util {
 
@@ -21,5 +23,9 @@ public class Util {
         Path tempFile = Files.createTempFile(java.util.UUID.randomUUID().toString(), extension);
         Files.write(tempFile, ClassLoader.getSystemResource(inputResource).openStream().readAllBytes());
         return tempFile.toString();
+    }
+
+    public static Nota makeValidGrade() {
+        return new Nota("uniqueId", "uniqueId", "uniqueId", 10, LocalDate.of(2018,10,2));
     }
 }
